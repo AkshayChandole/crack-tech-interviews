@@ -1,0 +1,6 @@
+id: foundations
+category: system-design
+title: Foundations
+summary: The building blocks every design starts from, including scaling, networking, APIs, and load balancing.
+items:
+  - load-balancing

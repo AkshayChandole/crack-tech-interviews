@@ -25,13 +25,16 @@ const isoDate = s
   .string()
   .regex(/^\d{4}-\d{2}-\d{2}$/, "Must be a date in YYYY-MM-DD format");
 
+const title = s.string().min(1).max(120);
+const summary = s.string().min(1).max(200);
+
+// Fields shared by every content item (lessons, problems, future types).
 export const baseFrontmatter = s
   .object({
     id: slug,
-    title: s.string().min(1).max(120),
-    summary: s.string().min(1).max(200),
+    title,
+    summary,
     category: s.enum(categories),
-    module: slug,
     difficulty: s.enum(difficulties),
     seniority: s.array(s.enum(seniorities)).min(1),
     prerequisites: slugList,
@@ -45,7 +48,60 @@ export const baseFrontmatter = s
   })
   .strict();
 
+// Lessons belong to a module; problems are listed directly on the category.
 export const lessonFrontmatter = baseFrontmatter.extend({
   type: s.literal("lesson"),
+  module: slug,
   kind: s.enum(lessonKinds),
 });
+
+export const problemFrontmatter = baseFrontmatter.extend({
+  type: s.literal("problem"),
+  companies: slugList,
+  estimatedInterviewTime: s.number().int().min(15).max(90),
+  focusAreas: s.array(slug).min(1),
+});
+
+export const conceptFrontmatter = s
+  .object({
+    id: slug,
+    term: s.string().min(1).max(80),
+    aliases: s.array(s.string().min(1)).default([]),
+    definition: s.string().min(1).max(400),
+    lesson: slug.optional(),
+  })
+  .strict();
+
+export const pathSchema = s
+  .object({
+    id: slug,
+    title,
+    audience: s.string().min(1).max(200),
+    description: s.string().min(1).max(400),
+    groups: s
+      .array(s.object({ title, items: s.array(slug).min(1) }).strict())
+      .min(1),
+  })
+  .strict();
+
+// A module owns the order of its lessons.
+export const moduleSchema = s
+  .object({
+    id: slug,
+    category: s.enum(categories),
+    title,
+    summary,
+    items: s.array(slug).min(1),
+  })
+  .strict();
+
+// A category owns the order of its modules and problems.
+export const categorySchema = s
+  .object({
+    id: s.enum(categories),
+    title,
+    summary,
+    modules: s.array(slug).min(1),
+    problems: slugList,
+  })
+  .strict();

@@ -1,0 +1,68 @@
+---
+id: url-shortener
+title: Design a URL Shortener
+summary: Design a service like bit.ly that creates short links and redirects billions of clicks with low latency.
+category: system-design
+type: problem
+difficulty: foundational
+seniority: [senior, staff]
+companies: [google, amazon, meta]
+estimatedInterviewTime: 45
+focusAreas: [hashing, caching, key-generation]
+related: [load-balancing]
+tags: [read-heavy, caching]
+status: draft
+authors: [akshay]
+updated: 2026-10-23
+---
+
+## Problem statement & clarifying questions
+
+Users submit a long URL and get a short one; visiting the short URL redirects to the original. Clarify custom aliases, expiration, analytics, and expected scale.
+
+## Functional & non-functional requirements
+
+- Create a short link; redirect from it; optional custom alias and expiry.
+- Redirects must be fast (p99 under 50 ms) and highly available; creation can be slightly slower.
+
+## Back-of-the-envelope estimates
+
+100M new links per month is about 40 writes per second. At a 100:1 read-to-write ratio, that is about 4,000 redirects per second on average, with peaks several times higher.
+
+## API design
+
+- `POST /links { url, alias?, expiresAt? } → { shortUrl }`
+- `GET /{code}` → `301` or `302` redirect
+
+## Data model
+
+A key-value table mapping `code → { url, createdAt, expiresAt, ownerId }`, keyed by `code`.
+
+## High-level design
+
+Clients reach stateless app servers behind a load balancer. Writes generate a code and store the mapping; reads check a cache first, then the database.
+
+## Deep dives
+
+- **Code generation:** a counter encoded in base62 versus hashing the URL; trade-offs in collisions and predictability.
+- **Caching:** most traffic hits a small set of hot links, so a read-through cache absorbs the bulk of redirects.
+
+## Bottlenecks & failure modes
+
+Hot links can overload a single cache shard; a central counter becomes a write bottleneck and single point of failure.
+
+## Trade-offs & alternatives considered
+
+`301` redirects reduce load but hide clicks from analytics; `302` keeps analytics accurate at a higher read cost.
+
+## Senior vs. staff: what a staff-level answer adds
+
+A staff-level answer covers abuse prevention, multi-region writes and code-space partitioning, and how the design evolves as analytics becomes a product.
+
+## Follow-up questions
+
+How would you support link analytics in near real time? How do you prevent malicious links?
+
+## 45-minute interview timeline
+
+- 0–5 min: requirements · 5–10 min: estimates and API · 10–25 min: high-level design · 25–40 min: deep dives · 40–45 min: trade-offs and wrap-up

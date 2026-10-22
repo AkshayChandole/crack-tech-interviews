@@ -1,0 +1,11 @@
+id: staff-loop-4-weeks
+title: Staff loop in 4 weeks
+audience: Engineers preparing for staff-level system design loops
+description: A focused journey through the highest-leverage system design topics, from building blocks to full interview problems.
+groups:
+  - title: Week 1 — Foundations
+    items:
+      - load-balancing
+  - title: Week 2 — Practice problems
+    items:
+      - url-shortener

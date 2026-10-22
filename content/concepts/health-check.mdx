@@ -1,0 +1,9 @@
+---
+id: health-check
+term: Health check
+aliases: [health checks, health probe, liveness probe]
+definition: A periodic probe a load balancer or orchestrator sends to a server to decide whether it should keep receiving traffic.
+lesson: load-balancing
+---
+
+Active health checks send requests such as `GET /healthz` on a fixed interval and remove a server after several consecutive failures. Passive health checks infer failure from errors and timeouts on real traffic. Most production setups combine both.

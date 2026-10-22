@@ -36,7 +36,18 @@ In development, [http://localhost:3000/dev/tokens](http://localhost:3000/dev/tok
 
 ## Content
 
-Lessons are MDX files in `content/<category>/lessons/`, for example `content/system-design/lessons/load-balancing.mdx`. Frontmatter is validated against the schemas in `src/lib/content/schema.ts` (see the [content model](docs/content-model.md)); invalid content fails `pnpm content`, `pnpm typecheck`, and `pnpm build`.
+All content lives in `content/` and is validated against the schemas in `src/lib/content/schema.ts` (see the [content model](docs/content-model.md)):
+
+| Type     | Location                               |
+| -------- | -------------------------------------- |
+| Category | `content/<category>/category.yaml`     |
+| Module   | `content/<category>/modules/<id>.yaml` |
+| Lesson   | `content/<category>/lessons/<id>.mdx`  |
+| Problem  | `content/<category>/problems/<id>.mdx` |
+| Concept  | `content/concepts/<id>.mdx`            |
+| Path     | `content/paths/<id>.yaml`              |
+
+Invalid content fails `pnpm content`, `pnpm typecheck`, and `pnpm build`.
 
 `pnpm dev` and `pnpm build` run Velite automatically (watching for changes in dev). Generated output goes to `.velite/` and is imported as `#site/content`.
 
