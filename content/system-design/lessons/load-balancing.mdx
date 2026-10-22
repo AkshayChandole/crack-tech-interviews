@@ -1,0 +1,52 @@
+---
+id: load-balancing
+title: Load Balancing
+summary: How to spread traffic across servers, detect failures, and avoid creating a new single point of failure.
+category: system-design
+module: foundations
+type: lesson
+kind: building-block
+difficulty: foundational
+seniority: [senior, staff]
+tags: [scalability, availability, networking]
+status: draft
+authors: [akshay]
+updated: 2026-10-23
+---
+
+## Why it matters
+
+A single server has a ceiling on throughput and is a single point of failure. A load balancer lets you scale horizontally by spreading requests across a pool of interchangeable servers, and keeps the system available when some of them fail.
+
+## Core idea
+
+Clients talk to one stable address. The load balancer forwards each request to a healthy backend chosen by a balancing algorithm, and stops sending traffic to backends that fail health checks.
+
+## How it works
+
+- **Layer 4 vs. layer 7:** L4 balancers route on IP and port and are fast and protocol-agnostic. L7 balancers understand HTTP, so they can route by path or header, terminate TLS, and retry idempotent requests.
+- **Algorithms:** round robin, weighted round robin, least connections, and consistent hashing when requests for the same key should land on the same server.
+- **Health checks:** active probes (e.g. `GET /healthz` every few seconds) plus passive detection from failed requests.
+
+## Trade-offs
+
+| Choice             | Gains                                     | Costs                                    |
+| ------------------ | ----------------------------------------- | ---------------------------------------- |
+| L7 over L4         | Smarter routing, TLS termination, retries | More CPU per request, more configuration |
+| Sticky sessions    | Simple stateful apps                      | Uneven load, harder failover             |
+| Consistent hashing | Cache locality                            | Hot keys can overload one server         |
+
+## In interviews
+
+Introduce a load balancer as soon as you have more than one instance of a stateless service, and say which layer it operates at. At the staff level, discuss how the load balancer itself stays highly available (redundant pairs, anycast, or DNS across regions).
+
+## Common mistakes
+
+- Drawing one load balancer box and never addressing its own failure.
+- Using sticky sessions to paper over state that belongs in a shared store.
+
+## Key takeaways
+
+- Load balancers enable horizontal scaling and failover for stateless services.
+- Pick L4 or L7 deliberately; L7 buys routing features at a CPU cost.
+- The balancer must not become the new single point of failure.

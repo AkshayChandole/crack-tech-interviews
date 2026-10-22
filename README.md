@@ -21,17 +21,24 @@ In development, [http://localhost:3000/dev/tokens](http://localhost:3000/dev/tok
 
 ## Scripts
 
-| Command             | Description                                          |
-| ------------------- | ---------------------------------------------------- |
-| `pnpm dev`          | Start the development server                         |
-| `pnpm build`        | Create a production build                            |
-| `pnpm start`        | Serve the production build                           |
-| `pnpm lint`         | Run ESLint                                           |
-| `pnpm typecheck`    | Generate route types and run the TypeScript compiler |
-| `pnpm format`       | Format all files with Prettier                       |
-| `pnpm format:check` | Check formatting without changing files              |
-| `pnpm test`         | Run unit tests once                                  |
-| `pnpm test:watch`   | Run unit tests in watch mode                         |
+| Command             | Description                                                          |
+| ------------------- | -------------------------------------------------------------------- |
+| `pnpm dev`          | Start the development server                                         |
+| `pnpm build`        | Create a production build                                            |
+| `pnpm start`        | Serve the production build                                           |
+| `pnpm content`      | Build and validate content with Velite                               |
+| `pnpm lint`         | Run ESLint                                                           |
+| `pnpm typecheck`    | Build content, generate route types, and run the TypeScript compiler |
+| `pnpm format`       | Format all files with Prettier                                       |
+| `pnpm format:check` | Check formatting without changing files                              |
+| `pnpm test`         | Run unit tests once                                                  |
+| `pnpm test:watch`   | Run unit tests in watch mode                                         |
+
+## Content
+
+Lessons are MDX files in `content/<category>/lessons/`, for example `content/system-design/lessons/load-balancing.mdx`. Frontmatter is validated against the schemas in `src/lib/content/schema.ts` (see the [content model](docs/content-model.md)); invalid content fails `pnpm content`, `pnpm typecheck`, and `pnpm build`.
+
+`pnpm dev` and `pnpm build` run Velite automatically (watching for changes in dev). Generated output goes to `.velite/` and is imported as `#site/content`.
 
 ## UI components
 

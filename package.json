@@ -6,8 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "content": "velite build --clean --strict",
     "lint": "eslint",
-    "typecheck": "next typegen && tsc --noEmit",
+    "typecheck": "pnpm content && next typegen && tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
@@ -37,6 +38,7 @@
     "shadcn": "^4.22.1",
     "tailwindcss": "^4",
     "typescript": "^5",
+    "velite": "^0.4.0",
     "vitest": "^5.0.5"
   },
   "engines": {
