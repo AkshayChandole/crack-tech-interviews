@@ -8,6 +8,7 @@ import {
   pathSchema,
   problemFrontmatter,
 } from "./src/lib/content/schema";
+import { validateContent } from "./src/lib/content/validate";
 
 const lessons = defineCollection({
   name: "Lesson",
@@ -68,4 +69,12 @@ export default defineConfig({
   collections: { lessons, problems, concepts, paths, modules, categories },
   // Validation errors fail the build instead of only being logged.
   strict: true,
+  prepare: (data) => {
+    const errors = validateContent(data);
+    if (errors.length > 0) {
+      throw new Error(
+        `Content validation failed (${errors.length}):\n${errors.map((e) => `  - ${e}`).join("\n")}`,
+      );
+    }
+  },
 });

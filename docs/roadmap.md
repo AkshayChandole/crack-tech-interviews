@@ -35,8 +35,8 @@ Steps run in order. A step's scope can be split further if it turns out larger t
 |---|---|---|---|
 | 6 | ☑ | `feat(content): set up Velite with base and lesson schemas` | One sample lesson validates and builds |
 | 7 | ☑ | `feat(content): add problem, concept, path, module and category schemas` | Sample of each type validates |
-| 8 | ☐ | `feat(content): validate references, prerequisite cycles and review gate` | Build fails on broken references, cycles, or unreviewed published items |
-| 9 | ☐ | `feat(content): add content query layer with tests` | `lib/content` functions covered by unit tests |
+| 8 | ☑ | `feat(content): validate references, prerequisite cycles and review gate` | Build fails on broken references, cycles, or unreviewed published items |
+| 9 | ☐ | `feat(content): add content query layer with tests` | `lib/content` functions covered by unit tests; drafts and in-review items excluded in production |
 
 ## M2 · Reading experience
 

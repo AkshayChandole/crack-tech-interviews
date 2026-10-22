@@ -60,8 +60,9 @@ describe("lessonFrontmatter", () => {
   it.each(["id", "title", "summary", "module", "kind", "updated"])(
     "requires %s",
     (field) => {
-      const { [field as keyof typeof validLesson]: _, ...rest } = validLesson;
-      expect(issuePaths(lessonFrontmatter, rest)).toContain(field);
+      const lesson: Record<string, unknown> = { ...validLesson };
+      delete lesson[field];
+      expect(issuePaths(lessonFrontmatter, lesson)).toContain(field);
     },
   );
 
