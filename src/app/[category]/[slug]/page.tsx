@@ -38,7 +38,7 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[category]/[slug]">): Promise<Metadata> {
   const lesson = await getLessonFromParams(params);
-  if (!lesson) return {};
+  if (!lesson) return { title: "Page not found" };
   return { title: lesson.title, description: lesson.summary };
 }
 
