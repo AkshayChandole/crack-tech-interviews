@@ -1,5 +1,7 @@
 # CrackTechInterviews
 
+[![CI](https://github.com/AkshayChandole/crack-tech-interviews/actions/workflows/ci.yml/badge.svg)](https://github.com/AkshayChandole/crack-tech-interviews/actions/workflows/ci.yml)
+
 Deep, visual system design interview preparation for senior and staff engineers.
 
 ## Getting started
@@ -39,3 +41,9 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Contributing
 
 `main` is protected. Every change goes through a pull request from its own branch, one focused commit per pull request. See the [roadmap](docs/roadmap.md) for the delivery workflow.
+
+CI runs on every pull request and on pushes to `main`: format check, lint, typecheck, unit tests, and build. Run the same checks locally before pushing:
+
+```bash
+pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build
+```
