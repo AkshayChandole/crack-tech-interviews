@@ -36,7 +36,7 @@ Steps run in order. A step's scope can be split further if it turns out larger t
 | 6 | ☑ | `feat(content): set up Velite with base and lesson schemas` | One sample lesson validates and builds |
 | 7 | ☑ | `feat(content): add problem, concept, path, module and category schemas` | Sample of each type validates |
 | 8 | ☑ | `feat(content): validate references, prerequisite cycles and review gate` | Build fails on broken references, cycles, or unreviewed published items |
-| 9 | ☐ | `feat(content): add content query layer with tests` | `lib/content` functions covered by unit tests; drafts and in-review items excluded in production |
+| 9 | ☑ | `feat(content): add content query layer with tests` | `lib/content` functions covered by unit tests; drafts and in-review items excluded in production |
 
 ## M2 · Reading experience
 
@@ -100,5 +100,6 @@ Runs in parallel from M2 onward, once lessons can be rendered.
 | Protect `main` (pull request required) | ☑ Done |
 | Require CI checks to pass before merge | After step 3 |
 | Create Vercel project and connect the repo | Before step 30 (can be done earlier for previews) |
+| Set `SHOW_DRAFTS=true` for the Vercel Preview environment, so drafts can be reviewed on preview deployments | With the Vercel project |
 | Choose and register a domain | Before step 30 |
 | Create analytics and Sentry accounts | Before step 27 |

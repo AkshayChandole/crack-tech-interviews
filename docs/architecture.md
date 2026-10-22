@@ -95,7 +95,8 @@ Single Next.js application — not a monorepo. A monorepo is reconsidered only w
 - Velite loads `content/`, `diagrams/`, and `scenarios/`, validates them against the schemas in [content-model.md](content-model.md), and emits typed data.
 - Build fails on: schema errors, unresolved references, prerequisite cycles, published items without a review block, diagrams without alt text.
 - Computed at build time: reading time, table of contents, backlinks, search index.
-- `lib/content` exposes typed query functions; it is the only consumer of Velite output.
+- `lib/content` exposes typed query functions; it is the only consumer of Velite output. Queries are pure functions (`createContentQueries`) bound to the generated data, so they are unit tested against fixtures.
+- Visibility: production returns published items only; drafts and in-review items are included in development or when `SHOW_DRAFTS=true` (preview deployments).
 
 ### 5.2 Scenario engine (`features/scenarios`)
 
