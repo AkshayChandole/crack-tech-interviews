@@ -47,7 +47,7 @@ All content lives in `content/` and is validated against the schemas in `src/lib
 | Concept  | `content/concepts/<id>.mdx`            |
 | Path     | `content/paths/<id>.yaml`              |
 
-Invalid content fails `pnpm content`, `pnpm typecheck`, and `pnpm build`.
+Invalid content fails `pnpm content`, `pnpm typecheck`, and `pnpm build`. Besides per-file schemas, every build checks that references resolve, ids are unique, prerequisites have no cycles, published items are reviewed, and problems use the required sections (`src/lib/content/validate.ts`). In `pnpm dev`, errors are logged and the last valid content stays in place.
 
 `pnpm dev` and `pnpm build` run Velite automatically (watching for changes in dev). Generated output goes to `.velite/` and is imported as `#site/content`.
 

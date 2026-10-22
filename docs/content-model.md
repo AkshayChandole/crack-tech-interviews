@@ -1,6 +1,6 @@
 # Content Model
 
-> Status: **Approved** · Last updated: 2026-10-23 (revised in roadmap step 7: `module` is lesson-only; category file is `category.yaml`; module and category file schemas added)
+> Status: **Approved** · Last updated: 2026-10-23 (revised in roadmap step 7: `module` is lesson-only; category file is `category.yaml`; module and category file schemas added. Step 8: validation rules made precise)
 >
 > This document defines how content in CrackTechInterviews is structured, validated, linked, and addressed. It is the source of truth for the content schema; the build-time validation (Velite) implements it.
 
@@ -67,12 +67,13 @@ updated: 2026-10-23
 
 **Computed at build time (never hand-written):** reading time, table of contents, backlinks ("referenced by"), word count.
 
-**Validation rules:**
+**Validation rules** (per-file rules in `src/lib/content/schema.ts`; cross-content rules in `src/lib/content/validate.ts`, run during every content build):
 
-- `id` is unique within its category and must never change after publication (use `redirects.yaml` if a rename is unavoidable).
-- All `prerequisites`, `related`, and `concepts` references must resolve, or the build fails.
+- `id` is unique: lessons and problems share one namespace (prerequisites, related links, and paths can point to either); concepts, paths, modules, and categories each have their own. Ids must never change after publication (use `redirects.yaml` if a rename is unavoidable).
+- All references must resolve, or the build fails: `prerequisites`, `related`, `concepts`, a concept's `lesson`, path items, module items, and category modules and problems.
+- Every lesson is listed in the `items` of the module it names, every module in its category's `modules`, and every problem in its category's `problems`.
 - Prerequisite references must not form a cycle.
-- **Review gate:** an item with `status: published` must have a complete `review` block. Drafts and in-review items are excluded from production builds.
+- **Review gate:** an item with `status: published` must have a complete `review` block, and may only list published items as `prerequisites` or `related`. Drafts and in-review items are excluded from production by the content query layer (`lib/content`).
 
 ### 3.2 `lesson`
 
@@ -109,7 +110,7 @@ estimatedInterviewTime: 45          # minutes
 focusAreas: [sharding, caching, consistency]
 ```
 
-**Required sections, in order** (validated at build time):
+**Required sections, in order** (validated at build time). Each is an `##` heading whose text must match exactly; the list lives in `requiredProblemSections` in `src/lib/content/validate.ts`. Notes in parentheses below are guidance, not part of the heading.
 
 1. Problem statement & clarifying questions
 2. Functional & non-functional requirements
