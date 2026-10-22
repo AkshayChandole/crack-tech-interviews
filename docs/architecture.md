@@ -47,6 +47,8 @@ All heavy lifting happens at **build time**. At runtime the site is pre-rendered
 2. **Server Components by default.**
    Lessons render as static HTML. Only interactive pieces are Client Components, keeping lesson pages light.
 
+   Every route is statically generated. The root layout sets `ensureStatic = "navigation"`, so dev and the build fail if anything adds request-time rendering, and unknown URLs such as `/system-design/typo` return a real 404. `partialPrefetching` is off because static pages should be prefetched in full for instant navigation.
+
 3. **Category is a route parameter, not hardcoded.**
    Routes live under `app/[category]/…`. Launching `/lld` or `/dsa` is a content change, not new route code.
 

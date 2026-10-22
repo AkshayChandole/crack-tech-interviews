@@ -28,6 +28,8 @@
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",
+    "@tailwindcss/typography": "^0.5.20",
+    "@types/mdx": "^2.0.14",
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",

@@ -7,7 +7,10 @@ import {
 const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
-  partialPrefetching: true,
+  // Off: every page is static, so links should prefetch the complete page and
+  // navigate instantly. Partial prefetching only prefetches an app shell and
+  // suits pages with request-time content, which this site doesn't have.
+  partialPrefetching: false,
   turbopack: {
     rules: {
       "*.css": {

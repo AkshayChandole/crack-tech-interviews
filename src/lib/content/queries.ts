@@ -88,6 +88,7 @@ export function createContentQueries(
     getCategories: (): Category[] => source.categories,
     getCategory: (id: string): Category | undefined => categoriesById.get(id),
 
+    getModule: (id: string): Module | undefined => modulesById.get(id),
     getModuleTree,
     getLessons,
     getProblems,
