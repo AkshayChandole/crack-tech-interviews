@@ -17,13 +17,17 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Command | Description |
-|---|---|
-| `pnpm dev` | Start the development server |
-| `pnpm build` | Create a production build |
-| `pnpm start` | Serve the production build |
-| `pnpm lint` | Run ESLint |
-| `pnpm typecheck` | Generate route types and run the TypeScript compiler |
+| Command             | Description                                          |
+| ------------------- | ---------------------------------------------------- |
+| `pnpm dev`          | Start the development server                         |
+| `pnpm build`        | Create a production build                            |
+| `pnpm start`        | Serve the production build                           |
+| `pnpm lint`         | Run ESLint                                           |
+| `pnpm typecheck`    | Generate route types and run the TypeScript compiler |
+| `pnpm format`       | Format all files with Prettier                       |
+| `pnpm format:check` | Check formatting without changing files              |
+| `pnpm test`         | Run unit tests once                                  |
+| `pnpm test:watch`   | Run unit tests in watch mode                         |
 
 ## Documentation
 
