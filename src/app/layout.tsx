@@ -18,8 +18,14 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
 });
 
+// The whole site is statically generated (docs/architecture.md). This makes
+// dev and the build fail if any route adds request-time rendering, and makes
+// unknown dynamic params (e.g. /system-design/typo) render fully before
+// responding, so they return 404 instead of a streamed 200 fallback.
+export const ensureStatic = "navigation";
+
 export const metadata: Metadata = {
-  title: siteConfig.name,
+  title: { default: siteConfig.name, template: `%s · ${siteConfig.name}` },
   description: siteConfig.description,
 };
 

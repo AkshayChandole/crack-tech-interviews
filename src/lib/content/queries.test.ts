@@ -208,6 +208,11 @@ describe("draft visibility", () => {
 });
 
 describe("lookups", () => {
+  it("finds a module by id", () => {
+    expect(production.getModule("data")?.title).toBe("Data");
+    expect(production.getModule("missing")).toBeUndefined();
+  });
+
   it("finds a lesson only in its own category", () => {
     expect(production.getLesson("system-design", "sharding")?.id).toBe(
       "sharding",

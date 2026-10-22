@@ -13,4 +13,5 @@ export const content = createContentQueries(source, {
 });
 
 export type { Item, ModuleWithLessons, PathWithItems } from "./queries";
+export * from "./labels";
 export * from "./urls";

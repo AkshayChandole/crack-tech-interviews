@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @import "tw-animate-css";
 /* Variants (data-open, data-checked, …) and utilities used by shadcn/ui components. */
 @import "shadcn/tailwind.css";
@@ -55,6 +56,27 @@
   --color-diagram-external: var(--diagram-external);
   --color-diagram-external-subtle: var(--diagram-external-subtle);
   --color-diagram-flow: var(--diagram-flow);
+}
+
+/* Maps @tailwindcss/typography colors to our tokens, so prose follows the theme. */
+@utility prose-tokens {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-lead: var(--muted-foreground);
+  --tw-prose-links: var(--link);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-counters: var(--muted-foreground);
+  --tw-prose-bullets: var(--muted-foreground);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--foreground);
+  --tw-prose-quote-borders: var(--border);
+  --tw-prose-captions: var(--muted-foreground);
+  --tw-prose-kbd: var(--foreground);
+  --tw-prose-code: var(--foreground);
+  --tw-prose-pre-code: var(--foreground);
+  --tw-prose-pre-bg: var(--muted);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
 }
 
 @layer base {
