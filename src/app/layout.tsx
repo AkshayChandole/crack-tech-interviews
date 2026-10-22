@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+
+import { siteConfig } from "@/lib/site";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "CrackTechInterviews",
-  description:
-    "Deep, visual system design interview preparation for senior and staff engineers.",
+  title: siteConfig.name,
+  description: siteConfig.description,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
