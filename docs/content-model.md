@@ -1,6 +1,6 @@
 # Content Model
 
-> Status: **Approved** · Last updated: 2026-10-23
+> Status: **Approved** · Last updated: 2026-10-23 (revised in roadmap step 7: `module` is lesson-only; category file is `category.yaml`; module and category file schemas added)
 >
 > This document defines how content in CrackTechInterviews is structured, validated, linked, and addressed. It is the source of truth for the content schema; the build-time validation (Velite) implements it.
 
@@ -28,8 +28,9 @@ Content is organized in three independent layers. Separating *where content live
 
 ```
 Category        system-design            (future: lld, dsa, ai-system-design, …)
- └─ Module      data-storage             (ordered grouping, navigation only)
-     └─ Item    sharding                 (lesson | problem | future types)
+ ├─ Module      data-storage             (ordered grouping of lessons, navigation only)
+ │   └─ Lesson  sharding
+ └─ Problem     url-shortener            (listed directly on the category, in order)
 Path            staff-loop-4-weeks       (ordered list of item ids, any category)
 Concept         consistent-hashing       (glossary entry, optionally backed by a lesson)
 ```
@@ -49,7 +50,6 @@ id: sharding                    # stable, permanent, unique within the category
 title: Sharding & Partitioning
 summary: How to split data across machines without creating hotspots.
 category: system-design
-module: data-storage
 type: lesson                    # lesson | problem
 difficulty: intermediate        # foundational | intermediate | advanced
 seniority: [senior, staff]      # who this matters most for in interviews
@@ -76,9 +76,10 @@ updated: 2026-10-23
 
 ### 3.2 `lesson`
 
-Additional field:
+Additional fields:
 
 ```yaml
+module: data-storage            # module id; lessons only (problems are listed on the category)
 kind: building-block            # concept | building-block | pattern
 ```
 
@@ -223,7 +224,7 @@ Renamed ids are handled in `content/redirects.yaml` (permanent redirects).
 ```
 content/
   system-design/
-    _category.yaml
+    category.yaml                # category metadata + ordered module and problem ids
     modules/
       data-storage.yaml          # module metadata + ordered item ids
     lessons/
@@ -241,7 +242,25 @@ scenarios/
   lb-round-robin.yaml
 ```
 
-Ordering is owned by module files, so files are never renamed to reorder content.
+Ordering is owned by the category and module files, so files are never renamed to reorder content. (The category file is not named `_category.yaml` because Velite ignores files starting with `_`.)
+
+```yaml
+# content/system-design/category.yaml
+id: system-design
+title: System Design
+summary: Design scalable, reliable distributed systems.
+modules: [foundations, data-storage]       # ordered
+problems: [url-shortener, rate-limiter]    # ordered
+```
+
+```yaml
+# content/system-design/modules/data-storage.yaml
+id: data-storage
+category: system-design
+title: Data Storage
+summary: How to store, index, replicate, and partition data.
+items: [sql-vs-nosql, indexing, replication, sharding]   # ordered lesson ids
+```
 
 ---
 
