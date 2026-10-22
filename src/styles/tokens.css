@@ -1,0 +1,92 @@
+/*
+ * Design tokens. Raw values per theme; Tailwind utilities are mapped in
+ * src/app/globals.css. Values are hex so src/styles/tokens.test.ts can verify
+ * WCAG contrast. Palette: zinc neutrals + Circuit (teal) accent.
+ */
+
+:root {
+  color-scheme: light;
+
+  --background: #ffffff;
+  --foreground: #09090b;
+  --card: #ffffff;
+  --card-foreground: #09090b;
+  --popover: #ffffff;
+  --popover-foreground: #09090b;
+
+  --primary: #0f766e;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
+  --muted: #f4f4f5;
+  --muted-foreground: #52525b;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
+  --destructive: #dc2626;
+
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #0d9488;
+
+  --link: #0f766e;
+  --brand-subtle: #ccfbf1;
+  --brand-subtle-foreground: #115e59;
+
+  /* Diagram palette: one fixed color per component type. */
+  --diagram-client: #334155;
+  --diagram-client-subtle: #f1f5f9;
+  --diagram-service: #1d4ed8;
+  --diagram-service-subtle: #eff6ff;
+  --diagram-database: #6d28d9;
+  --diagram-database-subtle: #f5f3ff;
+  --diagram-cache: #be123c;
+  --diagram-cache-subtle: #fff1f2;
+  --diagram-queue: #92400e;
+  --diagram-queue-subtle: #fffbeb;
+  --diagram-external: #52525b;
+  --diagram-external-subtle: #fafafa;
+  --diagram-flow: #0d9488;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --background: #09090b;
+  --foreground: #fafafa;
+  --card: #18181b;
+  --card-foreground: #fafafa;
+  --popover: #18181b;
+  --popover-foreground: #fafafa;
+
+  --primary: #14b8a6;
+  --primary-foreground: #042f2e;
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+  --destructive: #ef4444;
+
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #14b8a6;
+
+  --link: #2dd4bf;
+  --brand-subtle: #042f2e;
+  --brand-subtle-foreground: #99f6e4;
+
+  --diagram-client: #e2e8f0;
+  --diagram-client-subtle: #1e293b;
+  --diagram-service: #93c5fd;
+  --diagram-service-subtle: #172554;
+  --diagram-database: #c4b5fd;
+  --diagram-database-subtle: #2e1065;
+  --diagram-cache: #fda4af;
+  --diagram-cache-subtle: #4c0519;
+  --diagram-queue: #fcd34d;
+  --diagram-queue-subtle: #451a03;
+  --diagram-external: #a1a1aa;
+  --diagram-external-subtle: #18181b;
+  --diagram-flow: #2dd4bf;
+}

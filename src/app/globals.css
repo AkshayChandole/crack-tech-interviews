@@ -1,1 +1,58 @@
 @import "tailwindcss";
+@import "../styles/tokens.css";
+
+/* Dark mode follows the `.dark` class set by next-themes, not the media query. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-link: var(--link);
+  --color-brand-subtle: var(--brand-subtle);
+  --color-brand-subtle-foreground: var(--brand-subtle-foreground);
+
+  --color-diagram-client: var(--diagram-client);
+  --color-diagram-client-subtle: var(--diagram-client-subtle);
+  --color-diagram-service: var(--diagram-service);
+  --color-diagram-service-subtle: var(--diagram-service-subtle);
+  --color-diagram-database: var(--diagram-database);
+  --color-diagram-database-subtle: var(--diagram-database-subtle);
+  --color-diagram-cache: var(--diagram-cache);
+  --color-diagram-cache-subtle: var(--diagram-cache-subtle);
+  --color-diagram-queue: var(--diagram-queue);
+  --color-diagram-queue-subtle: var(--diagram-queue-subtle);
+  --color-diagram-external: var(--diagram-external);
+  --color-diagram-external-subtle: var(--diagram-external-subtle);
+  --color-diagram-flow: var(--diagram-flow);
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+}

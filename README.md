@@ -17,6 +17,8 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+In development, [http://localhost:3000/dev/tokens](http://localhost:3000/dev/tokens) previews the design tokens (colors, typography, diagram palette) in both themes. Design tokens live in `src/styles/tokens.css`.
+
 ## Scripts
 
 | Command             | Description                                          |
