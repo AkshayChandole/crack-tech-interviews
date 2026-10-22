@@ -42,7 +42,7 @@ Steps run in order. A step's scope can be split further if it turns out larger t
 
 | # | Status | Pull request | Done when |
 |---|---|---|---|
-| 10 | ☐ | `feat: add app shell (header, nav, footer)` | Responsive shell with navigation and theme toggle |
+| 10 | ☑ | `feat: add app shell (header, nav, footer)` | Responsive shell with navigation and theme toggle |
 | 11 | ☐ | `feat: render lesson pages from MDX with metadata header` | Sample lesson renders at `/system-design/[slug]` |
 | 12 | ☐ | `feat: add module sidebar and prev/next navigation` | Sidebar tree and prev/next follow module order; mobile drawer |
 | 13 | ☐ | `feat: add scroll-aware TOC and reading progress bar` | TOC highlights the current section |

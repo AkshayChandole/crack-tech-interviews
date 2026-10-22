@@ -40,13 +40,14 @@ export function ThemeToggle() {
           <Button
             key={value}
             variant={selected ? "secondary" : "ghost"}
-            size="sm"
+            size="icon-sm"
             aria-pressed={selected}
+            aria-label={`${label} theme`}
+            title={`${label} theme`}
             onClick={() => setTheme(value)}
             className={selected ? undefined : "text-muted-foreground"}
           >
             <Icon aria-hidden="true" />
-            {label}
           </Button>
         );
       })}
