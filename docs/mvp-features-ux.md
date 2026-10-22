@@ -145,13 +145,14 @@ Defaults to the system theme. Every diagram and scenario is designed for both li
 
 **Selected: Circuit (teal).** Engineered, calm, with a "green means passing" feel.
 
-| | Value | Use |
-|---|---|---|
-| Accent | Teal 500 `#14B8A6` | Links and accents in dark theme, active flow in diagrams |
-| Accent strong | Teal 600 `#0D9488` | Primary buttons, links in light theme |
-| Accent subtle | Teal 100 `#CCFBF1` / Teal 800 `#115E59` | Tinted badges and highlights (background / text) |
+| Token | Light theme | Dark theme | Use |
+|---|---|---|---|
+| Primary | Teal 700 `#0F766E` | Teal 500 `#14B8A6` | Primary buttons, brand text, active states |
+| Link | Teal 700 `#0F766E` | Teal 400 `#2DD4BF` | Inline links |
+| Focus ring / active flow | Teal 600 `#0D9488` | Teal 500 / 400 | Focus rings; animated flow in diagrams |
+| Brand subtle | Teal 100 `#CCFBF1` + Teal 800 `#115E59` | Teal 950 `#042F2E` + Teal 200 `#99F6E4` | Tinted badges and highlights (background + text) |
 
-Final values, including dark-theme variants, are verified for WCAG AA contrast when the design tokens are implemented.
+All values are verified for WCAG AA by an automated test (`src/styles/tokens.test.ts`). Teal 600 was originally proposed for light-theme buttons and links but only reaches 3.7:1 against white, so Teal 700 (5.5:1) is used instead; Teal 600 remains for non-text uses, which need 3:1. The source of truth for all values is `src/styles/tokens.css`.
 
 **Why teal:** it's distinct from competitors' blues, purples, and oranges, and it doesn't collide with any color in the diagram palette.
 
