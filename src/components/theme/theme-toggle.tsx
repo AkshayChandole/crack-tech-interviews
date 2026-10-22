@@ -1,12 +1,15 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
+import { Button } from "@/components/ui/button";
+
 const options = [
-  { value: "system", label: "System" },
-  { value: "light", label: "Light" },
-  { value: "dark", label: "Dark" },
+  { value: "system", label: "System", icon: Monitor },
+  { value: "light", label: "Light", icon: Sun },
+  { value: "dark", label: "Dark", icon: Moon },
 ] as const;
 
 const subscribe = () => () => {};
@@ -29,24 +32,22 @@ export function ThemeToggle() {
     <div
       role="group"
       aria-label="Theme"
-      className="inline-flex rounded-lg border p-0.5 text-sm"
+      className="inline-flex gap-0.5 rounded-lg border p-0.5"
     >
-      {options.map((option) => {
-        const selected = isClient && theme === option.value;
+      {options.map(({ value, label, icon: Icon }) => {
+        const selected = isClient && theme === value;
         return (
-          <button
-            key={option.value}
-            type="button"
+          <Button
+            key={value}
+            variant={selected ? "secondary" : "ghost"}
+            size="sm"
             aria-pressed={selected}
-            onClick={() => setTheme(option.value)}
-            className={`rounded-md px-3 py-1 transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
-              selected
-                ? "bg-secondary text-secondary-foreground"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
+            onClick={() => setTheme(value)}
+            className={selected ? undefined : "text-muted-foreground"}
           >
-            {option.label}
-          </button>
+            <Icon aria-hidden="true" />
+            {label}
+          </Button>
         );
       })}
     </div>

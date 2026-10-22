@@ -27,7 +27,7 @@ Steps run in order. A step's scope can be split further if it turns out larger t
 | 2 | ☑ | `chore: add Prettier and Vitest` | `pnpm format`, `pnpm test` work; one sample test passes |
 | 3 | ☑ | `ci: add GitHub Actions for lint, typecheck, test and build` | Checks run and pass on pull requests |
 | 4 | ☑ | `feat: add design tokens, Geist fonts and light/dark theme` | Circuit (teal) tokens, zinc neutrals, diagram palette; theme toggle with system default |
-| 5 | ☐ | `chore: set up shadcn/ui` | Base primitives available and themed with our tokens |
+| 5 | ☑ | `chore: set up shadcn/ui` | Base primitives available and themed with our tokens |
 
 ## M1 · Content pipeline
 
