@@ -49,6 +49,8 @@ All content lives in `content/` and is validated against the schemas in `src/lib
 
 Invalid content fails `pnpm content`, `pnpm typecheck`, and `pnpm build`. Besides per-file schemas, every build checks that references resolve, ids are unique, prerequisites have no cycles, published items are reviewed, and problems use the required sections (`src/lib/content/validate.ts`). In `pnpm dev`, errors are logged and the last valid content stays in place.
 
+Pages read content only through the query layer in `src/lib/content` (`import { content } from "@/lib/content"`), never from `#site/content` directly. Production shows published items only; drafts and in-review items appear in development, or anywhere `SHOW_DRAFTS=true` is set (for example, preview deployments). In development, [http://localhost:3000/dev/content](http://localhost:3000/dev/content) lists everything the query layer returns.
+
 `pnpm dev` and `pnpm build` run Velite automatically (watching for changes in dev). Generated output goes to `.velite/` and is imported as `#site/content`.
 
 ## UI components
