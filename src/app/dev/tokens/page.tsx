@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Design tokens",
@@ -55,6 +56,15 @@ const diagramRoles = [
   },
 ];
 
+const buttonVariants = [
+  "default",
+  "secondary",
+  "outline",
+  "ghost",
+  "destructive",
+  "link",
+] as const;
+
 export default function DesignTokensPage() {
   if (process.env.NODE_ENV === "production") notFound();
 
@@ -107,6 +117,18 @@ export default function DesignTokensPage() {
         >
           Tab to me to see the focus ring
         </button>
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-lg font-medium">Buttons</h2>
+        <div className="flex flex-wrap items-center gap-2">
+          {buttonVariants.map((variant) => (
+            <Button key={variant} variant={variant}>
+              {variant}
+            </Button>
+          ))}
+          <Button disabled>disabled</Button>
+        </div>
       </section>
 
       <section className="flex flex-col gap-3">

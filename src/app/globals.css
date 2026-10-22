@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+/* Variants (data-open, data-checked, …) and utilities used by shadcn/ui components. */
+@import "shadcn/tailwind.css";
 @import "../styles/tokens.css";
 
 /* Dark mode follows the `.dark` class set by next-themes, not the media query. */
@@ -6,7 +9,16 @@
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
+  --font-heading: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -49,7 +61,7 @@
   *,
   ::before,
   ::after {
-    @apply border-border;
+    @apply border-border outline-ring/50;
   }
 
   body {

@@ -7,6 +7,9 @@
 :root {
   color-scheme: light;
 
+  /* Base corner radius; the radius scale is derived from it in globals.css. */
+  --radius: 0.625rem;
+
   --background: #ffffff;
   --foreground: #09090b;
   --card: #ffffff;

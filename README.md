@@ -33,6 +33,16 @@ In development, [http://localhost:3000/dev/tokens](http://localhost:3000/dev/tok
 | `pnpm test`         | Run unit tests once                                  |
 | `pnpm test:watch`   | Run unit tests in watch mode                         |
 
+## UI components
+
+UI primitives come from [shadcn/ui](https://ui.shadcn.com) (Radix base, Nova style) and live in `src/components/ui/`. Add a component with:
+
+```bash
+pnpm dlx shadcn@latest add <component>
+```
+
+Review the diff before committing: if the CLI adds color variables to `src/app/globals.css`, move them into `src/styles/tokens.css` as hex values so the contrast test covers them. Don't run `shadcn init` again; it overwrites the design tokens.
+
 ## Documentation
 
 - [Content model](docs/content-model.md)
