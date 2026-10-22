@@ -21,7 +21,7 @@ export default function ContentPage() {
   if (process.env.NODE_ENV === "production") notFound();
 
   return (
-    <main className="mx-auto flex max-w-3xl flex-col gap-10 px-6 py-12">
+    <div className="mx-auto flex max-w-3xl flex-col gap-10 px-6 py-12">
       <header>
         <h1 className="text-2xl font-semibold tracking-tight">Content</h1>
         <p className="text-sm text-muted-foreground">
@@ -116,6 +116,6 @@ export default function ContentPage() {
           );
         })}
       </section>
-    </main>
+    </div>
   );
 }

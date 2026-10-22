@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -69,7 +68,7 @@ export default function DesignTokensPage() {
   if (process.env.NODE_ENV === "production") notFound();
 
   return (
-    <main className="mx-auto flex max-w-4xl flex-col gap-10 px-6 py-12">
+    <div className="mx-auto flex max-w-4xl flex-col gap-10 px-6 py-12">
       <header className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">
@@ -79,7 +78,6 @@ export default function DesignTokensPage() {
             Development only. Not available in production builds.
           </p>
         </div>
-        <ThemeToggle />
       </header>
 
       <section className="flex flex-col gap-3">
@@ -149,6 +147,6 @@ export default function DesignTokensPage() {
           <span className="size-3 rounded-full bg-diagram-flow" />
         </div>
       </section>
-    </main>
+    </div>
   );
 }
