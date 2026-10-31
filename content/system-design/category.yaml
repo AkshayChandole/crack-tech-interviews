@@ -3,5 +3,6 @@ title: System Design
 summary: Design scalable, reliable distributed systems and explain the trade-offs like a senior or staff engineer.
 modules:
   - foundations
+  - data-storage
 problems:
   - url-shortener
