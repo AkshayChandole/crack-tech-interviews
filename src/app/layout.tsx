@@ -32,8 +32,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     // next-themes sets the theme class on <html> before hydration.
+    // data-scroll-behavior: page navigations jump instantly; only in-page
+    // anchor links use the smooth scrolling set in globals.css.
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
