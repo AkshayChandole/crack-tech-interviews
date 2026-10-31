@@ -4,6 +4,12 @@ import { notFound } from "next/navigation";
 
 import { LessonPager } from "@/components/lesson/lesson-pager";
 import { LessonSidebar } from "@/components/lesson/lesson-sidebar";
+import { ReadingProgress } from "@/components/lesson/reading-progress";
+import {
+  MobileTableOfContents,
+  TableOfContents,
+} from "@/components/lesson/table-of-contents";
+import { flattenToc } from "@/components/lesson/toc";
 import { LessonsDrawer } from "@/components/lesson/lessons-drawer";
 import { MDXContent } from "@/components/mdx/mdx-content";
 import {
@@ -59,15 +65,21 @@ export default async function LessonPage({
     lesson.id,
   );
   const sidebar = <LessonSidebar tree={tree} currentLessonId={lesson.id} />;
+  const toc = flattenToc(lesson.toc);
 
   return (
-    <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[16rem_minmax(0,1fr)]">
+    <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[16rem_minmax(0,1fr)] xl:grid-cols-[16rem_minmax(0,1fr)_14rem]">
+      <ReadingProgress targetId="lesson-article" />
+
       {/* Sticky below the 3.5rem header; scrolls on its own when long. */}
       <aside className="sticky top-14 hidden h-[calc(100svh-3.5rem)] overflow-y-auto py-10 lg:block">
         {sidebar}
       </aside>
 
-      <article className="mx-auto w-full max-w-3xl py-10 sm:py-14">
+      <article
+        id="lesson-article"
+        className="mx-auto w-full max-w-3xl py-10 sm:py-14"
+      >
         <div className="mb-6 lg:hidden">
           <LessonsDrawer title={category?.title ?? "Lessons"}>
             {sidebar}
@@ -117,12 +129,18 @@ export default async function LessonPage({
           </ul>
         </header>
 
-        <div className="prose prose-lg mt-8 max-w-none prose-tokens prose-code:rounded-md prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:font-normal prose-code:before:content-none prose-code:after:content-none">
+        <MobileTableOfContents items={toc} />
+
+        <div className="prose prose-lg mt-8 max-w-none prose-tokens prose-headings:scroll-mt-28 prose-code:rounded-md prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:font-normal prose-code:before:content-none prose-code:after:content-none">
           <MDXContent code={lesson.body} />
         </div>
 
         <LessonPager previous={previous} next={next} />
       </article>
+
+      <aside className="sticky top-14 hidden h-[calc(100svh-3.5rem)] overflow-y-auto py-14 xl:block">
+        <TableOfContents items={toc} />
+      </aside>
     </div>
   );
 }

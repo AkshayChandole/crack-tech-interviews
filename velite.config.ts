@@ -1,3 +1,4 @@
+import rehypeSlug from "rehype-slug";
 import { defineCollection, defineConfig, s } from "velite";
 
 import {
@@ -69,6 +70,8 @@ export default defineConfig({
   collections: { lessons, problems, concepts, paths, modules, categories },
   // Validation errors fail the build instead of only being logged.
   strict: true,
+  // Heading ids use the same slugger as s.toc(), so TOC links match anchors.
+  mdx: { rehypePlugins: [rehypeSlug] },
   prepare: (data) => {
     const errors = validateContent(data);
     if (errors.length > 0) {

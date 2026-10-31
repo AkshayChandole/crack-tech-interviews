@@ -45,7 +45,7 @@ Steps run in order. A step's scope can be split further if it turns out larger t
 | 10 | ☑ | `feat: add app shell (header, nav, footer)` | Responsive shell with navigation and theme toggle |
 | 11 | ☑ | `feat: render lesson pages from MDX with metadata header` | Sample lesson renders at `/system-design/[slug]` |
 | 12 | ☑ | `feat: add module sidebar and prev/next navigation` | Sidebar tree and prev/next follow module order; mobile drawer |
-| 13 | ☐ | `feat: add scroll-aware TOC and reading progress bar` | TOC highlights the current section |
+| 13 | ☑ | `feat: add scroll-aware TOC and reading progress bar` | TOC highlights the current section |
 | 14 | ☐ | `feat: add MDX components (callouts, takeaways, comparisons, code blocks)` | All components render in a sample lesson |
 | 15 | ☐ | `feat: add problem page with interview timeline and think-first mode` | Sample problem renders with timeline rail, senior vs. staff comparison, and think-first prompts |
 | 16 | ☐ | `feat: add System Design hub and problems index with filters` | Hub shows modules; problems filter by difficulty and focus area |
