@@ -1,0 +1,54 @@
+---
+id: replication
+title: Replication
+summary: Keeping copies of data on multiple machines for availability and read scale, and what you give up in consistency.
+category: system-design
+module: data-storage
+type: lesson
+kind: concept
+difficulty: intermediate
+seniority: [senior, staff]
+prerequisites: [scaling-fundamentals]
+tags: [databases, availability, consistency]
+status: draft
+authors: [akshay]
+updated: 2026-10-31
+---
+
+## Why it matters
+
+Replication is how a database survives machine failures and serves more reads than one node can handle. Nearly every storage choice in an interview implies a replication model, and the trade-offs drive consistency guarantees.
+
+## Core idea
+
+Every write is copied to several nodes. The design questions are who accepts writes, and whether a write is acknowledged before or after the copies are made.
+
+## How it works
+
+- **Leader-follower:** one leader accepts writes and streams changes to followers, which serve reads. Simple and common; the leader is a write bottleneck and failover must be handled.
+- **Multi-leader:** several nodes accept writes, typically one per region. Lower write latency across regions, but concurrent writes conflict and need resolution.
+- **Leaderless:** clients write to and read from several replicas, using quorums (for example `W + R > N`) to overlap reads with recent writes.
+- **Synchronous vs. asynchronous:** synchronous replication waits for followers before acknowledging, trading latency for durability; asynchronous acknowledges immediately and risks losing recent writes on failover.
+
+## Trade-offs
+
+| Model           | Gains                       | Costs                                       |
+| --------------- | --------------------------- | ------------------------------------------- |
+| Leader-follower | Simple, no write conflicts  | Write bottleneck, failover complexity       |
+| Multi-leader    | Local writes in each region | Conflict resolution                         |
+| Leaderless      | No single leader to fail    | Tunable but weaker consistency, read repair |
+
+## In interviews
+
+Name the replication model when you choose a database, and say what a reader sees right after a write (replication lag). At the staff level, discuss failover: how a new leader is elected and what happens to writes that were never replicated.
+
+## Common mistakes
+
+- Promising strong consistency while reading from asynchronous followers.
+- Ignoring replication lag in features like "edit then view your own post".
+
+## Key takeaways
+
+- Replication buys availability and read throughput, not write throughput.
+- Synchronous vs. asynchronous is a durability-versus-latency choice.
+- Always say what a client reads immediately after it writes.

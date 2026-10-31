@@ -1,0 +1,6 @@
+id: data-storage
+category: system-design
+title: Data Storage
+summary: How to store, index, replicate, and partition data, and how to choose a database.
+items:
+  - replication

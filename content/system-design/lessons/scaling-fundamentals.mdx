@@ -1,0 +1,51 @@
+---
+id: scaling-fundamentals
+title: Scaling Fundamentals
+summary: Vertical vs. horizontal scaling, why statelessness matters, and how to find the real bottleneck before adding machines.
+category: system-design
+module: foundations
+type: lesson
+kind: concept
+difficulty: foundational
+seniority: [senior, staff]
+tags: [scalability]
+status: draft
+authors: [akshay]
+updated: 2026-10-31
+---
+
+## Why it matters
+
+Almost every design question is a scaling question in disguise. Interviewers want to see that you scale deliberately: you find the constraint first, then pick the cheapest change that removes it.
+
+## Core idea
+
+You can make one machine bigger (vertical scaling) or add more machines (horizontal scaling). Horizontal scaling only works for components that don't keep unique state, so the work is mostly about moving state out of the services you want to replicate.
+
+## How it works
+
+- **Vertical scaling:** more CPU, memory, or faster disks on the same machine. Simple and often the right first step, but it has a hard ceiling and keeps a single point of failure.
+- **Horizontal scaling:** run many identical instances behind a load balancer. Requires stateless services; session data, uploads, and caches move to shared stores.
+- **Find the bottleneck:** measure throughput, latency percentiles, and saturation (CPU, memory, I/O, connections) per tier before changing anything.
+
+## Trade-offs
+
+| Approach   | Gains                                          | Costs                                                               |
+| ---------- | ---------------------------------------------- | ------------------------------------------------------------------- |
+| Vertical   | No code changes, strong consistency stays easy | Hardware ceiling, expensive at the top end, single point of failure |
+| Horizontal | Near-linear capacity, fault tolerance          | Requires statelessness, adds coordination and operational overhead  |
+
+## In interviews
+
+State the expected load early, identify which tier saturates first, and scale that tier. At the staff level, explain when you would deliberately _not_ scale out yet, because the operational cost outweighs the benefit at current traffic.
+
+## Common mistakes
+
+- Adding servers to a stateless tier while the database is the actual bottleneck.
+- Treating "horizontal" as always better and ignoring how much simpler one large machine is to run.
+
+## Key takeaways
+
+- Measure first; scale the tier that saturates.
+- Horizontal scaling depends on moving state out of the service.
+- Vertical scaling is a legitimate first step, not a failure of design.
